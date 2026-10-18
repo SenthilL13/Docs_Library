@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+  }
+
+  html {
+    /* Prevent unwanted horizontal scroll across devices */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-sky-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 min-h-screen antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    touch-action: manipulation;
+  }
+
+  /* Prevent automatic zoom on iOS Safari when focusing inputs */
+  @media (max-width: 640px) {
+    input[type="text"],
+    input[type="password"],
+    input[type="search"],
+    input[type="number"],
+    input[type="email"],
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Scrollbar (hidden on mobile, styled on desktop) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+  }
+
+  /* Mobile: hide native scrollbar */
+  @media (max-width: 640px) {
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+  }
+
+  /* Mobile-specific button tap handling */
+  @media (max-width: 640px) {
+    button,
+    a {
+      -webkit-tap-highlight-color: rgba(14, 165, 233, 0.1);
+    }
+  }
+
+  /* Prevent horizontal overflow on images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Optimize font rendering on mobile */
+  @media (max-width: 640px) {
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  /* Fluid typography scaling */
+  .text-fluid-lg {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+  }
+  .text-fluid-xl {
+    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  }
+  .text-fluid-2xl {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+  .text-fluid-3xl {
+    font-size: clamp(1.5rem, 4vw, 1.875rem);
+  }
+}
+
+/* PDF page shadow */
+.pdf-canvas-shadow {
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.08);
+}
+
+/* Hide horizontal scrollbar while retaining momentum scrolling */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transitions for sidebar & drawer overlays */
+.sidebar-overlay {
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modal fade-in animation */
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Safe area padding utilities */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
